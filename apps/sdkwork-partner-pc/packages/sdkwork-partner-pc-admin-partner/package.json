@@ -26,6 +26,7 @@
   "dependencies": {
     "@sdkwork/partner-backend-sdk": "workspace:*",
     "@sdkwork/partner-pc-admin-core": "workspace:*",
+    "@sdkwork/utils": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "lucide-react": "catalog:",

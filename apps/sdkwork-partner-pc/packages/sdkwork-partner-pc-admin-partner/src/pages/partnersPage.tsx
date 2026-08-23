@@ -35,6 +35,7 @@ import {
   textAreaClass,
   Tooltip,
 } from '@sdkwork/partner-pc-admin-core/ui';
+import { uuid } from '@sdkwork/utils/id';
 import { PartnerStatusBadge, JoinFeeStatusBadge } from '../components/status';
 import { partnerService } from '../services/partnerService';
 import { useRequestGuard, getPartnerUserSearchPort, type PartnerUserOption } from '@sdkwork/partner-pc-admin-core';
@@ -841,7 +842,7 @@ function PartnerDetailPanel({
     // retry after a network failure replays server-side instead of creating a
     // duplicate payment (and duplicate ancestor commission). The token is
     // regenerated once the submission succeeds or the amount changes.
-    joinFeeIdempotencyKey.current ??= crypto.randomUUID();
+    joinFeeIdempotencyKey.current ??= uuid();
     try {
       const form = new FormData(event.currentTarget);
       const amount = String(form.get('amount') ?? '').trim();
