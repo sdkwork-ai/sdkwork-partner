@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite --configLoader native",
     "build": "vite build --configLoader native",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build:dev": "node ../../../sdkwork-specs/tools/build-browser-client.mjs --app-root . --environment dev",
+    "build:test": "node ../../../sdkwork-specs/tools/build-browser-client.mjs --app-root . --environment test",
+    "build:staging": "node ../../../sdkwork-specs/tools/build-browser-client.mjs --app-root . --environment staging",
+    "build:prod": "node ../../../sdkwork-specs/tools/build-browser-client.mjs --app-root . --environment prod"
   },
   "dependencies": {
     "@sdkwork/partner-backend-sdk": "workspace:*",

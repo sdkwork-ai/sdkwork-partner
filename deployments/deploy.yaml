@@ -40,6 +40,38 @@ profiles:
         tls: dtupay.cn
         mode: web+api
         web: adaptive
+      - domain: partner-dev.skubc.com
+        tls: skubc.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.skubc.cn
+        tls: skubc.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.zowalk.com
+        tls: zowalk.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.zowalk.cn
+        tls: zowalk.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.offer86.com
+        tls: offer86.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.offer86.cn
+        tls: offer86.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.86offer.com
+        tls: 86offer.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.86offer.cn
+        tls: 86offer.cn
+        mode: web+api
+        web: adaptive
     packages: []
     overrides:
       topology:
@@ -83,6 +115,38 @@ profiles:
         web: adaptive
       - domain: partner.dtupay.cn
         tls: dtupay.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner.skubc.com
+        tls: skubc.com
+        mode: web+api
+        web: adaptive
+      - domain: partner.skubc.cn
+        tls: skubc.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner.zowalk.com
+        tls: zowalk.com
+        mode: web+api
+        web: adaptive
+      - domain: partner.zowalk.cn
+        tls: zowalk.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner.offer86.com
+        tls: offer86.com
+        mode: web+api
+        web: adaptive
+      - domain: partner.offer86.cn
+        tls: offer86.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner.86offer.com
+        tls: 86offer.com
+        mode: web+api
+        web: adaptive
+      - domain: partner.86offer.cn
+        tls: 86offer.cn
         mode: web+api
         web: adaptive
     packages: []
@@ -130,6 +194,38 @@ profiles:
         tls: dtupay.cn
         mode: web+api
         web: adaptive
+      - domain: partner-staging.skubc.com
+        tls: skubc.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.skubc.cn
+        tls: skubc.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.zowalk.com
+        tls: zowalk.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.zowalk.cn
+        tls: zowalk.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.offer86.com
+        tls: offer86.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.offer86.cn
+        tls: offer86.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.86offer.com
+        tls: 86offer.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.86offer.cn
+        tls: 86offer.cn
+        mode: web+api
+        web: adaptive
     packages: []
     overrides:
       topology:
@@ -173,6 +269,38 @@ profiles:
         web: adaptive
       - domain: partner-test.dtupay.cn
         tls: dtupay.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.skubc.com
+        tls: skubc.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.skubc.cn
+        tls: skubc.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.zowalk.com
+        tls: zowalk.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.zowalk.cn
+        tls: zowalk.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.offer86.com
+        tls: offer86.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.offer86.cn
+        tls: offer86.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.86offer.com
+        tls: 86offer.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.86offer.cn
+        tls: 86offer.cn
         mode: web+api
         web: adaptive
     packages: []
@@ -220,6 +348,38 @@ profiles:
         tls: dtupay.cn
         mode: web+api
         web: adaptive
+      - domain: partner-dev.skubc.com
+        tls: skubc.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.skubc.cn
+        tls: skubc.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.zowalk.com
+        tls: zowalk.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.zowalk.cn
+        tls: zowalk.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.offer86.com
+        tls: offer86.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.offer86.cn
+        tls: offer86.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.86offer.com
+        tls: 86offer.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-dev.86offer.cn
+        tls: 86offer.cn
+        mode: web+api
+        web: adaptive
     packages: []
     overrides:
       topology:
@@ -263,6 +423,38 @@ profiles:
         web: adaptive
       - domain: partner.dtupay.cn
         tls: dtupay.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner.skubc.com
+        tls: skubc.com
+        mode: web+api
+        web: adaptive
+      - domain: partner.skubc.cn
+        tls: skubc.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner.zowalk.com
+        tls: zowalk.com
+        mode: web+api
+        web: adaptive
+      - domain: partner.zowalk.cn
+        tls: zowalk.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner.offer86.com
+        tls: offer86.com
+        mode: web+api
+        web: adaptive
+      - domain: partner.offer86.cn
+        tls: offer86.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner.86offer.com
+        tls: 86offer.com
+        mode: web+api
+        web: adaptive
+      - domain: partner.86offer.cn
+        tls: 86offer.cn
         mode: web+api
         web: adaptive
     packages: []
@@ -310,6 +502,38 @@ profiles:
         tls: dtupay.cn
         mode: web+api
         web: adaptive
+      - domain: partner-staging.skubc.com
+        tls: skubc.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.skubc.cn
+        tls: skubc.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.zowalk.com
+        tls: zowalk.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.zowalk.cn
+        tls: zowalk.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.offer86.com
+        tls: offer86.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.offer86.cn
+        tls: offer86.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.86offer.com
+        tls: 86offer.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-staging.86offer.cn
+        tls: 86offer.cn
+        mode: web+api
+        web: adaptive
     packages: []
     overrides:
       topology:
@@ -353,6 +577,38 @@ profiles:
         web: adaptive
       - domain: partner-test.dtupay.cn
         tls: dtupay.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.skubc.com
+        tls: skubc.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.skubc.cn
+        tls: skubc.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.zowalk.com
+        tls: zowalk.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.zowalk.cn
+        tls: zowalk.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.offer86.com
+        tls: offer86.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.offer86.cn
+        tls: offer86.cn
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.86offer.com
+        tls: 86offer.com
+        mode: web+api
+        web: adaptive
+      - domain: partner-test.86offer.cn
+        tls: 86offer.cn
         mode: web+api
         web: adaptive
     packages: []
