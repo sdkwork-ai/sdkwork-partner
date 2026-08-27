@@ -5,10 +5,10 @@
 tablet_surface = "pc"
 
 [app_roots.pc_static_by_environment]
-development = "apps/sdkwork-partner-pc/dist/dev"
-test = "apps/sdkwork-partner-pc/dist/test"
-staging = "apps/sdkwork-partner-pc/dist/staging"
-production = "apps/sdkwork-partner-pc/dist/prod"
+development = "apps/sdkwork-partner-pc/dist/standalone/dev"
+test = "apps/sdkwork-partner-pc/dist/standalone/test"
+staging = "apps/sdkwork-partner-pc/dist/standalone/staging"
+production = "apps/sdkwork-partner-pc/dist/standalone/prod"
 
 [app_roots.static_fallback_by_environment]
 development = "deployments/webserver/static"
