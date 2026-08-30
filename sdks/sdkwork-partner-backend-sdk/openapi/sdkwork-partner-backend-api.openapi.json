@@ -111,7 +111,8 @@
             "AuthToken": [],
             "AccessToken": []
           }
-        ]
+        ],
+        "parameters": []
       },
       "post": {
         "operationId": "levels.create",
@@ -213,7 +214,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/backend/v3/api/partners/levels/restore_defaults": {
@@ -247,7 +249,8 @@
           "201": {
             "$ref": "#/components/responses/RestoreDefaultLevelsResultEnvelopeResponse"
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/backend/v3/api/partners/levels/{levelId}": {
@@ -565,7 +568,8 @@
             "AuthToken": [],
             "AccessToken": []
           }
-        ]
+        ],
+        "parameters": []
       },
       "patch": {
         "operationId": "commissionConfig.update",
@@ -667,7 +671,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/backend/v3/api/partners": {
@@ -945,7 +950,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/backend/v3/api/partners/{partnerId}": {
@@ -1725,7 +1731,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       },
       "get": {
         "operationId": "customerBindings.list",
@@ -2345,7 +2352,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/backend/v3/api/partners/settlements/run": {
@@ -2449,7 +2457,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/backend/v3/api/partners/settlements": {
@@ -2843,7 +2852,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/backend/v3/api/partners/audit_logs": {
@@ -3245,7 +3255,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/backend/v3/api/partners/withdrawals/{withdrawalId}/review": {
@@ -3575,7 +3586,8 @@
             "AuthToken": [],
             "AccessToken": []
           }
-        ]
+        ],
+        "parameters": []
       }
     },
     "/backend/v3/api/partners/stats": {
@@ -4894,19 +4906,13 @@
             "format": "int32"
           },
           "parentPartnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Parent partner id (null = top level).",
             "format": "int64",
             "x-sdkwork-int64-string": true
           },
           "userAccountId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Bound IAM user account id (null = not bound yet).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -5050,19 +5056,13 @@
             "format": "int32"
           },
           "parentPartnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Parent partner id (null = top level).",
             "format": "int64",
             "x-sdkwork-int64-string": true
           },
           "userAccountId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Bound IAM user account id (optional at creation; bind later from the partner list).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -5103,19 +5103,13 @@
             "format": "int32"
           },
           "parentPartnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Parent partner id (null = top level, clears the current parent).",
             "format": "int64",
             "x-sdkwork-int64-string": true
           },
           "userAccountId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Bound IAM user account id (null = unbind).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -5324,10 +5318,7 @@
             "description": "Paid timestamp."
           },
           "paidBy": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Operator id that recorded the payment.",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -5499,10 +5490,7 @@
             "description": "Unbound timestamp."
           },
           "unboundBy": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Operator id that unbound the customer.",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -6069,10 +6057,7 @@
             "description": "Reference type."
           },
           "refId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Reference id.",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -6221,10 +6206,7 @@
             ]
           },
           "reviewedBy": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Reviewer operator id.",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -6248,10 +6230,7 @@
             "description": "Paid timestamp."
           },
           "paidBy": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Paying operator id.",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -6905,10 +6884,7 @@
             "description": "Invite code submitted with the application (original input)."
           },
           "inviterPartnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Inviter partner id locked at submit time (null = no invite code).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -6932,10 +6908,7 @@
             "description": "Review comment (approval note or rejection reason)."
           },
           "reviewerUserId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Reviewer user id (null = not reviewed yet).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -6949,10 +6922,7 @@
             "format": "date-time"
           },
           "approvedPartnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Partner record created on approval (closed loop reference).",
             "format": "int64",
             "x-sdkwork-int64-string": true

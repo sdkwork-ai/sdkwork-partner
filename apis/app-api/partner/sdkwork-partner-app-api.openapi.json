@@ -89,7 +89,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/app/v3/api/partner_join/applications": {
@@ -186,7 +187,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/app/v3/api/partner_join/applications/mine": {
@@ -810,10 +812,7 @@
             "description": "Invite code submitted with the application (original input)."
           },
           "inviterPartnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Inviter partner id locked at submit time (null = no invite code).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -845,10 +844,7 @@
             "format": "date-time"
           },
           "approvedPartnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Partner record created on approval (closed loop reference).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -881,10 +877,7 @@
             "description": "Whether the invite code is valid."
           },
           "partnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Inviter partner id (null when invalid).",
             "format": "int64",
             "x-sdkwork-int64-string": true
