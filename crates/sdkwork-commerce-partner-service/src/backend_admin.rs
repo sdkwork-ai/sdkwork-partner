@@ -98,10 +98,10 @@ pub struct PartnerItem {
     pub phone: String,
     pub email: String,
     pub level_no: i32,
-    #[serde(with = "sdkwork_utils_rust::serde_int64::option")]
+    #[serde(with = "sdkwork_utils_rust::serde_int64::option", default)]
     pub parent_partner_id: Option<i64>,
     /// None = no IAM user account bound yet (bindable later).
-    #[serde(with = "sdkwork_utils_rust::serde_int64::option")]
+    #[serde(with = "sdkwork_utils_rust::serde_int64::option", default)]
     pub user_account_id: Option<i64>,
     pub status: String,
     pub join_fee_amount: String,

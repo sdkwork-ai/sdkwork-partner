@@ -114,7 +114,7 @@ pub struct PartnerJoinApplicationItem {
     /// Invite code submitted with the application (original input).
     pub invite_code: String,
     /// Inviter partner id locked at submit time (null = no invite code).
-    #[serde(with = "sdkwork_utils_rust::serde_int64::option")]
+    #[serde(with = "sdkwork_utils_rust::serde_int64::option", default)]
     pub inviter_partner_id: Option<i64>,
     /// Inviter partner display name (admin surface; empty when the application
     /// carried no invite code or the inviter was deleted).
@@ -128,11 +128,11 @@ pub struct PartnerJoinApplicationItem {
     /// Review comment (approval note or rejection reason).
     pub review_comment: String,
     /// Reviewer user id (null = not reviewed yet).
-    #[serde(with = "sdkwork_utils_rust::serde_int64::option")]
+    #[serde(with = "sdkwork_utils_rust::serde_int64::option", default)]
     pub reviewer_user_id: Option<i64>,
     pub reviewed_at: Option<DateTime<Utc>>,
     /// Partner record created on approval (closed loop reference).
-    #[serde(with = "sdkwork_utils_rust::serde_int64::option")]
+    #[serde(with = "sdkwork_utils_rust::serde_int64::option", default)]
     pub approved_partner_id: Option<i64>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
@@ -147,7 +147,7 @@ pub struct InviteCodeValidation {
     /// Whether the invite code is valid.
     pub valid: bool,
     /// Inviter partner id (null when invalid).
-    #[serde(with = "sdkwork_utils_rust::serde_int64::option")]
+    #[serde(with = "sdkwork_utils_rust::serde_int64::option", default)]
     pub partner_id: Option<i64>,
     /// Inviter partner display name (empty when invalid).
     pub partner_name: String,
