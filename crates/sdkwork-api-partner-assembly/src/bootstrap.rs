@@ -6,7 +6,7 @@
 
 use axum::Router;
 use std::sync::Arc;
-use sdkwork_web_bootstrap::{ApiAssemblyContribution, ReadinessCheck};
+use sdkwork_web_bootstrap::{ApiAssemblyContribution, ReadinessCheck, WebModule};
 use sdkwork_web_core::{DomainContextInjector, HttpRouteManifest};
 use sdkwork_partner_service_host::PartnerServiceHost;
 
@@ -68,3 +68,11 @@ pub async fn assemble_backend_api_contribution(context: ApiAssemblyContext) -> R
     )
 }
 
+
+/// Installs this application as a Web Module with caller-supplied assembly
+/// context (API_ASSEMBLY_SPEC §4.1.1).
+pub async fn web_module_with_context(
+    context: ApiAssemblyContext,
+) -> Result<WebModule, String> {
+    Ok(WebModule::from_contribution(assemble_api_router(context).await?))
+}

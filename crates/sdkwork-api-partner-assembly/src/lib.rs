@@ -1,14 +1,12 @@
 //! Gateway assembly for sdkwork-partner.
 //! Application bootstrap lives in `bootstrap.rs`; route inventory is in `assembly-manifest.json`.
+use sdkwork_web_bootstrap::WebModule;
 // SDKWORK-ASSEMBLY-LIB-CUSTOM
 
 mod bootstrap;
 mod generated;
 
-pub use bootstrap::{
-    assemble_api_router, assemble_app_api_contribution, assemble_backend_api_contribution,
-    ApiAssembly, ApiAssemblyContext,
-};
+pub use bootstrap::{assemble_api_router, ApiAssembly, ApiAssemblyContext, assemble_app_api_contribution, assemble_backend_api_contribution, web_module_with_context};
 
 use sdkwork_database_sqlx::DatabasePool;
 use sdkwork_partner_service_host::PartnerServiceHost;
@@ -120,4 +118,11 @@ pub fn app_api_route_manifest() -> sdkwork_web_core::HttpRouteManifest {
 
 pub fn assembly_route_count() -> usize {
     generated::ROUTE_CRATE_COUNT
+}
+
+/// Canonical Web Module definition for this application
+/// (API_ASSEMBLY_SPEC §4.1.1): the complete HTTP surface — every route,
+/// manifest, and OpenAPI document of this owner — as one installable module.
+pub async fn web_module() -> Result<WebModule, String> {
+    Ok(WebModule::from_contribution(assemble_api_router_from_env().await?))
 }
