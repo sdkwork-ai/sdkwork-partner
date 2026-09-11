@@ -41,6 +41,14 @@
       "files": [
         "001_levels_locale.sql"
       ]
+    },
+    "en-US": {
+      "version": "1.0.1",
+      "required": true,
+      "checksum": "sha256:2d5905b90992a104a0b7e2d2e11e1ef5d16ff2eabde8a6f18c36adfa427799e1",
+      "files": [
+        "001_levels_locale.sql"
+      ]
     }
   }
 }
