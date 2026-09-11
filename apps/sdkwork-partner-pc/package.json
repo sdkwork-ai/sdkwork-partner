@@ -30,15 +30,15 @@
     "@sdkwork/partner-pc-join": "workspace:*",
     "i18next": "catalog:",
     "react-i18next": "catalog:",
-    "lucide-react": "catalog:"
+    "lucide-react": "catalog:",
+    "tailwindcss": "catalog:",
+    "@tailwindcss/vite": "catalog:"
   },
   "devDependencies": {
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
     "typescript": "catalog:",
-    "vite": "catalog:",
-    "tailwindcss": "catalog:",
-    "@tailwindcss/vite": "catalog:"
+    "vite": "catalog:"
   }
 }
