@@ -1,0 +1,1 @@
+{"version":3,"file":"stats-overview-item-envelope.d.ts","sourceRoot":"","sources":["stats-overview-item-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,iBAAiB,EAAE,MAAM,uBAAuB,CAAC;AAE/D,MAAM,WAAW,yBAAyB;IACxC,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,iBAAiB,CAAC;KAAE,CAAC;CACrC"}

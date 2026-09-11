@@ -1,0 +1,1 @@
+{"version":3,"file":"partner-stat-item-envelope.d.ts","sourceRoot":"","sources":["partner-stat-item-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,qBAAqB,CAAC;AAE3D,MAAM,WAAW,uBAAuB;IACtC,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,eAAe,CAAC;KAAE,CAAC;CACnC"}

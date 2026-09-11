@@ -1,0 +1,1 @@
+{"version":3,"file":"partner-level-item-envelope.d.ts","sourceRoot":"","sources":["partner-level-item-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,gBAAgB,EAAE,MAAM,sBAAsB,CAAC;AAE7D,MAAM,WAAW,wBAAwB;IACvC,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,gBAAgB,CAAC;KAAE,CAAC;CACpC"}

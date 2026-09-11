@@ -1,0 +1,1 @@
+{"version":3,"file":"join-fee-payment-item-envelope.d.ts","sourceRoot":"","sources":["join-fee-payment-item-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,kBAAkB,EAAE,MAAM,yBAAyB,CAAC;AAElE,MAAM,WAAW,0BAA0B;IACzC,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,kBAAkB,CAAC;KAAE,CAAC;CACtC"}

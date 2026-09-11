@@ -1,0 +1,9 @@
+import type { PartnerJoinProgramItem } from './partner-join-program-item';
+export interface PartnerJoinProgramEnvelope {
+    code: 0;
+    traceId: string;
+    data?: {
+        item: PartnerJoinProgramItem;
+    };
+}
+//# sourceMappingURL=partner-join-program-envelope.d.ts.map

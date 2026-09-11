@@ -1,0 +1,1 @@
+{"version":3,"file":"invite-code-validate-envelope.d.ts","sourceRoot":"","sources":["invite-code-validate-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,sBAAsB,EAAE,MAAM,6BAA6B,CAAC;AAE1E,MAAM,WAAW,0BAA0B;IACzC,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,sBAAsB,CAAC;KAAE,CAAC;CAC1C"}

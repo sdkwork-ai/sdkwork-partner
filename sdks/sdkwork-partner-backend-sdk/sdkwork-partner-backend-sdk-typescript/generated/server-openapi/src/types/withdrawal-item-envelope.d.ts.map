@@ -1,0 +1,1 @@
+{"version":3,"file":"withdrawal-item-envelope.d.ts","sourceRoot":"","sources":["withdrawal-item-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,cAAc,EAAE,MAAM,mBAAmB,CAAC;AAExD,MAAM,WAAW,sBAAsB;IACrC,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,cAAc,CAAC;KAAE,CAAC;CAClC"}
