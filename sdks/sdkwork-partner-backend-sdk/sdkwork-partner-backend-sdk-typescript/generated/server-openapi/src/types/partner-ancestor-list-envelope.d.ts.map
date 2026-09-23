@@ -1,1 +1,0 @@
-{"version":3,"file":"partner-ancestor-list-envelope.d.ts","sourceRoot":"","sources":["partner-ancestor-list-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,mBAAmB,EAAE,MAAM,yBAAyB,CAAC;AAEnE,MAAM,WAAW,2BAA2B;IAC1C,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,EAAE;QAAE,IAAI,EAAE,mBAAmB,EAAE,CAAC;KAAE,CAAC;CACxC"}

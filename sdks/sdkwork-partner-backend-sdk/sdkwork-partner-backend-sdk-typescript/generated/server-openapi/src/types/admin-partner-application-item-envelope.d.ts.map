@@ -1,1 +1,0 @@
-{"version":3,"file":"admin-partner-application-item-envelope.d.ts","sourceRoot":"","sources":["admin-partner-application-item-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,2BAA2B,EAAE,MAAM,kCAAkC,CAAC;AAEpF,MAAM,WAAW,mCAAmC;IAClD,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,2BAA2B,CAAC;KAAE,CAAC;CAC/C"}

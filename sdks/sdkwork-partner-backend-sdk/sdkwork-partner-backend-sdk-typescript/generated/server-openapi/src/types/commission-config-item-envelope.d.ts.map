@@ -1,1 +1,0 @@
-{"version":3,"file":"commission-config-item-envelope.d.ts","sourceRoot":"","sources":["commission-config-item-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,oBAAoB,EAAE,MAAM,0BAA0B,CAAC;AAErE,MAAM,WAAW,4BAA4B;IAC3C,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,oBAAoB,CAAC;KAAE,CAAC;CACxC"}

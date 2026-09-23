@@ -1,1 +1,0 @@
-{"version":3,"file":"commission-event-item-envelope.d.ts","sourceRoot":"","sources":["commission-event-item-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,mBAAmB,EAAE,MAAM,yBAAyB,CAAC;AAEnE,MAAM,WAAW,2BAA2B;IAC1C,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,mBAAmB,CAAC;KAAE,CAAC;CACvC"}

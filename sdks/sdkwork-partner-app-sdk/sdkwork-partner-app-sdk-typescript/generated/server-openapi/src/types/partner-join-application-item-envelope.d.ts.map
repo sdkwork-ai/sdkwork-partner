@@ -1,1 +1,0 @@
-{"version":3,"file":"partner-join-application-item-envelope.d.ts","sourceRoot":"","sources":["partner-join-application-item-envelope.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,0BAA0B,EAAE,MAAM,iCAAiC,CAAC;AAElF,MAAM,WAAW,kCAAkC;IACjD,IAAI,EAAE,CAAC,CAAC;IACR,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,CAAC,EAAE;QAAE,IAAI,EAAE,0BAA0B,CAAC;KAAE,CAAC;CAC9C"}
