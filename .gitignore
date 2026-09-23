@@ -40,3 +40,13 @@ Thumbs.db
 
 # Runtime-generated env config (modified by local dev server)
 **/public/runtime-env.json
+
+# Local scratch and build residue (do not commit)
+tmp/
+.tmp/
+
+# Python bytecode (do not commit)
+__pycache__/
+
+# Local assistant state (do not commit)
+.workbuddy/
