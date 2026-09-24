@@ -18,8 +18,6 @@ dist/
 # TypeScript/JavaScript build artifacts emitted alongside source (tsc declaration/emit)
 *.d.ts.map
 *.js.map
-**/src/**/*.js
-**/src/**/*.d.ts
 
 # SDKWork generator reports (local)
 **/.sdkwork/sdkwork-generator-changes.json
@@ -51,10 +49,9 @@ __pycache__/
 # Local assistant state (do not commit)
 .workbuddy/
 
-# Compiler emit beside source is not content (REPOSITORY_BASELINE_SPEC.md section 2).
-# The negations keep authored ambient declarations committable.
-**/composed/**/*.js
-**/composed/**/*.d.ts
-!**/src/**/vite-env.d.ts
-!**/src/**/global.d.ts
-!**/src/**/shims.d.ts
+# Compiler emit is ignored only where the file is emit BY DEFINITION. The broad
+# `**/src/**/*.js` / `**/src/**/*.d.ts` globs are gone: `.gitignore` cannot express "ignore
+# this only when a same-stem .ts sibling exists", so they also hid authored declarations
+# (`vite-env.d.ts`, `styles.d.ts`, module shims) and real mini-program source under `src/`.
+# The sibling rule is enforced against tracked files by
+# `sdkwork-specs/tools/check-repository-baseline-content.mjs` instead.
