@@ -330,6 +330,7 @@ impl PartnerWalletPort for PartnerAccountWalletAdapter {
                 transaction_no: transaction_no.to_owned(),
                 request_no: idempotency_key.to_owned(),
                 idempotency_key: idempotency_key.to_owned(),
+                settled_amount: None,
             };
             self.store
                 .settle_account_hold(command, partner_request_hash(idempotency_key))
