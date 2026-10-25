@@ -60,3 +60,11 @@ __pycache__/
 # Added by repo-commit task 2026-09-25; targeted rules only, compliant with check-gitignore-standard
 sdks/**/*-typescript/src/*.js
 sdks/**/*-typescript/src/*.d.ts
+
+# Secrets and local key material (never commit). Added by repo-commit sweep.
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+*.keystore

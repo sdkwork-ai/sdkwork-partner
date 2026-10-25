@@ -6,7 +6,7 @@
     "name": "SDKWork Partner",
     "repository": "sdkwork-ai/sdkwork-partner",
     "sourcePath": ".",
-    "configPath": "sdkwork.app.config.json"
+    "configPath": "agent.app.config.json"
   },
   "release": {
     "artifactPrefix": "partner",
