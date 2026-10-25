@@ -68,3 +68,14 @@ sdks/**/*-typescript/src/*.d.ts
 *.pfx
 secrets/
 *.keystore
+
+# ---- auto-audited: local artifacts that must never be committed ----
+temp/
+*.tmp
+*.temp
+.cache/
+.turbo/
+.next/
+coverage/
+build/
+target/
