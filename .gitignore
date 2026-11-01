@@ -31,10 +31,13 @@ dist/
 Thumbs.db
 *.log
 
-# Local environment
+# Local environment (sdkwork-specs ENVIRONMENT_SPEC.md section 5.1.7): the
+# tracked shapes are `.env.example` and `.env.<deployment-profile>.<environment>.example`;
+# every other env file is host-local and never committed.
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+!.env.*.example
 
 # Runtime-generated env config (modified by local dev server)
 **/public/runtime-env.json
