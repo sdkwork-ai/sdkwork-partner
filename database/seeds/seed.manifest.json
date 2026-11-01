@@ -39,15 +39,15 @@
       "required": true,
       "checksum": "sha256:d3d12ffc1664a6af4f81b1cea1c0fed35effdfc09a0743d66534f4ccca0c113e",
       "files": [
-        "001_levels_locale.sql"
+        "locales/zh-CN/001_levels_locale.sql"
       ]
     },
     "en-US": {
       "version": "1.0.1",
       "required": true,
-      "checksum": "sha256:2d5905b90992a104a0b7e2d2e11e1ef5d16ff2eabde8a6f18c36adfa427799e1",
+      "checksum": "sha256:f2728ec2ade2e5903a92414ef645e7249bc237e912849ee90786ca694e2caf99",
       "files": [
-        "001_levels_locale.sql"
+        "locales/en-US/001_levels_locale.sql"
       ]
     }
   }
