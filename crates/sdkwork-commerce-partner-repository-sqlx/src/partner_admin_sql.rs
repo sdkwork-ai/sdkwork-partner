@@ -113,7 +113,7 @@ WITH RECURSIVE descendants AS (
     WHERE p.tenant_id = $1 AND p.organization_id = $2 AND p.deleted_at IS NULL
       AND d.depth < 64
 )
-SELECT COUNT(*) - 1 FROM descendants
+SELECT COUNT(*) - 1 AS count FROM descendants
 "#;
 
 /// Active customer binding for a customer user.

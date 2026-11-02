@@ -6,9 +6,10 @@ SDKWork Partner capability workspace — 多级合作伙伴（代理商）管理
 - Domain: `commerce`
 - Capability: `partner`
 - Backend API prefix: `/backend/v3/api/partners`
-- App API prefix: `/app/v3/api/partners` (二期，代理商自助端)
+- App API prefix: `/app/v3/api/partner_join`, `/app/v3/api/partner_center` (代理商自助端)
 - Database module: `partner` (table prefix `partner_`)
-- SDK family: `sdkwork-partner-backend-sdk` (`@sdkwork/partner-backend-sdk`)
+- SDK family: `sdkwork-partner-backend-sdk` (`@sdkwork/partner-backend-sdk`),
+  `sdkwork-partner-app-sdk` (`@sdkwork/partner-app-sdk`)
 
 ## Standards
 

@@ -18,7 +18,7 @@ export interface PartnerJoinApplicationItem {
   /** Invite code submitted with the application (original input). */
   inviteCode: string;
   /** Inviter partner id locked at submit time (null = no invite code). */
-  inviterPartnerId?: string | null;
+  inviterPartnerId?: string;
   /** Business introduction. */
   businessIntro?: string;
   /** Application status. */
@@ -28,7 +28,7 @@ export interface PartnerJoinApplicationItem {
   /** Review timestamp. */
   reviewedAt?: string | null;
   /** Partner record created on approval (closed loop reference). */
-  approvedPartnerId?: string | null;
+  approvedPartnerId?: string;
   /** Created timestamp. */
   createdAt: string;
   /** Updated timestamp. */

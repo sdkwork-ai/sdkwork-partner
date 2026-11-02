@@ -11,7 +11,7 @@ use sdkwork_api_partner_assembly::assemble_api_router_from_env;
 use sdkwork_iam_web_adapter::{
     build_web_framework_builder, iam_web_request_context_resolver_from_env,
 };
-use sdkwork_web_bootstrap::{ApiModuleRegistry, ComposedApiAssembly, infra_public_path_prefixes};
+use sdkwork_web_bootstrap::{infra_public_path_prefixes, ApiModuleRegistry, ComposedApiAssembly};
 
 const DEFAULT_BIND: &str = "0.0.0.0:18098";
 

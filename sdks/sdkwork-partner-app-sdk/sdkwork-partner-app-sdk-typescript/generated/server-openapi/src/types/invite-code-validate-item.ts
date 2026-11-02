@@ -4,7 +4,7 @@ export interface InviteCodeValidateItem {
   /** Whether the invite code is valid. */
   valid: boolean;
   /** Inviter partner id (null when invalid). */
-  partnerId?: string | null;
+  partnerId?: string;
   /** Inviter partner display name (empty when invalid). */
   partnerName?: string;
   /** Inviter partner level number (null when invalid). */

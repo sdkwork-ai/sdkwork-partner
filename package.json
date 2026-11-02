@@ -34,6 +34,8 @@
     "api:assembly:validate": "node ../sdkwork-specs/tools/validate-api-assembly.mjs --root .",
     "sdk:generate": "node tools/partner_sdk_generate.mjs",
     "sdk:check": "node tools/partner_sdk_generate.mjs --check",
+    "sdk:generate:app": "node tools/partner_app_sdk_generate.mjs",
+    "sdk:check:app": "node tools/partner_app_sdk_generate.mjs --check",
     "check:app-composition": "node ../sdkwork-specs/tools/verify-repo.mjs --root .",
     "check:cors-standard": "node ../sdkwork-specs/tools/check-cors-standard.mjs --root .",
     "db:postgres:plan": "cargo run --manifest-path ../sdkwork-database/Cargo.toml -p sdkwork-database-cli -- --app-root . plan --engine postgres",

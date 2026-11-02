@@ -34,6 +34,38 @@ const HTTP_ROUTES: &[HttpRoute] = &[
         "join",
         "partnerJoin.inviteCode.retrieve",
     ),
+    // Self-service distribution centre (分销中心): the partner is resolved from
+    // the authenticated user, so every route is dual-token protected.
+    HttpRoute::dual_token(
+        HttpMethod::Get,
+        "/app/v3/api/partner_center",
+        "center",
+        "partnerCenter.retrieve",
+    ),
+    HttpRoute::dual_token(
+        HttpMethod::Get,
+        "/app/v3/api/partner_center/team",
+        "center",
+        "partnerCenter.team.list",
+    ),
+    HttpRoute::dual_token(
+        HttpMethod::Get,
+        "/app/v3/api/partner_center/commissions",
+        "center",
+        "partnerCenter.commissionRecords.list",
+    ),
+    HttpRoute::dual_token(
+        HttpMethod::Get,
+        "/app/v3/api/partner_center/withdrawals",
+        "center",
+        "partnerCenter.withdrawals.list",
+    ),
+    HttpRoute::dual_token(
+        HttpMethod::Post,
+        "/app/v3/api/partner_center/withdrawals",
+        "center",
+        "partnerCenter.withdrawals.create",
+    ),
 ];
 
 /// App-surface public prefixes: infrastructure paths only.

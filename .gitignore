@@ -24,6 +24,9 @@ dist/
 **/.sdkwork/sdkwork-generator-manifest.json
 **/.sdkwork/sdkwork-generator-report.json
 
+# SDK generator manual-backup snapshots (local, never commit)
+**/.sdkwork/manual-backups/
+
 # Editor / OS
 .idea/
 .vscode/

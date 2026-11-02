@@ -13,3 +13,13 @@ export type { PartnerJoinProgramEnvelope } from './partner-join-program-envelope
 export type { PartnerJoinApplicationItemEnvelope } from './partner-join-application-item-envelope';
 export type { PartnerJoinApplicationListEnvelope } from './partner-join-application-list-envelope';
 export type { InviteCodeValidateEnvelope } from './invite-code-validate-envelope';
+export type { PartnerCenterItem } from './partner-center-item';
+export type { PartnerTeamMemberItem } from './partner-team-member-item';
+export type { PartnerCommissionRecordItem } from './partner-commission-record-item';
+export type { PartnerWithdrawalItem } from './partner-withdrawal-item';
+export type { CreatePartnerWithdrawalRequest } from './create-partner-withdrawal-request';
+export type { PartnerCenterEnvelope } from './partner-center-envelope';
+export type { PartnerTeamListEnvelope } from './partner-team-list-envelope';
+export type { PartnerCommissionRecordListEnvelope } from './partner-commission-record-list-envelope';
+export type { PartnerWithdrawalListEnvelope } from './partner-withdrawal-list-envelope';
+export type { PartnerWithdrawalEnvelope } from './partner-withdrawal-envelope';

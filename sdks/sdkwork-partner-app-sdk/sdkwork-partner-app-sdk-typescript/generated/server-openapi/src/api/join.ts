@@ -14,7 +14,7 @@ export class JoinPartnerJoinInviteCodeApi {
 
 /** Validate an invite code */
   async retrieve(code: string, requestOptions?: ApiRequestOptions): Promise<InviteCodeValidateItem> {
-    return this.client.request<InviteCodeValidateItem>(appApiPath(`/partner_join/invite_codes/${serializePathParameter(code, { name: 'code', style: 'simple', explode: false })}`), { signal: requestOptions?.signal, timeout: requestOptions?.timeout, method: 'GET' as any, skipAuth: true, sdkworkUnwrapKind: 'item' });
+    return this.client.request<InviteCodeValidateItem>(appApiPath(`/partner_join/invite_codes/${serializePathParameter(code, { name: 'code', style: 'simple', explode: false })}`), { ...(requestOptions?.signal !== undefined ? { signal: requestOptions.signal } : {}), ...(requestOptions?.timeout !== undefined ? { timeout: requestOptions.timeout } : {}), method: 'GET' as any, skipAuth: true, sdkworkUnwrapKind: 'item' });
   }
 }
 
@@ -33,7 +33,7 @@ export class JoinPartnerJoinApplicationApi {
 
 /** Submit a partner join application */
   async create(body: PartnerJoinApplicationSubmitRequest, requestOptions?: ApiRequestOptions): Promise<PartnerJoinApplicationItem> {
-    return this.client.request<PartnerJoinApplicationItem>(appApiPath(`/partner_join/applications`), { signal: requestOptions?.signal, timeout: requestOptions?.timeout, method: 'POST' as any, body, contentType: 'application/json', sdkworkUnwrapKind: 'item' });
+    return this.client.request<PartnerJoinApplicationItem>(appApiPath(`/partner_join/applications`), { ...(requestOptions?.signal !== undefined ? { signal: requestOptions.signal } : {}), ...(requestOptions?.timeout !== undefined ? { timeout: requestOptions.timeout } : {}), method: 'POST' as any, body, contentType: 'application/json', sdkworkUnwrapKind: 'item' });
   }
 
 /** List my join applications */
@@ -42,12 +42,12 @@ export class JoinPartnerJoinApplicationApi {
       { name: 'page', value: params?.page, style: 'form', explode: true, allowReserved: false },
       { name: 'page_size', value: params?.pageSize, style: 'form', explode: true, allowReserved: false },
     ]);
-    return this.client.request<{ items: PartnerJoinApplicationItem[]; pageInfo: PageInfo; }>(appendQueryString(appApiPath(`/partner_join/applications/mine`), query), { signal: requestOptions?.signal, timeout: requestOptions?.timeout, method: 'GET' as any, sdkworkUnwrapKind: 'page' });
+    return this.client.request<{ items: PartnerJoinApplicationItem[]; pageInfo: PageInfo; }>(appendQueryString(appApiPath(`/partner_join/applications/mine`), query), { ...(requestOptions?.signal !== undefined ? { signal: requestOptions.signal } : {}), ...(requestOptions?.timeout !== undefined ? { timeout: requestOptions.timeout } : {}), method: 'GET' as any, sdkworkUnwrapKind: 'page' });
   }
 
 /** Cancel my join application */
   async cancel(applicationId: string, requestOptions?: ApiRequestOptions): Promise<PartnerJoinApplicationItem> {
-    return this.client.request<PartnerJoinApplicationItem>(appApiPath(`/partner_join/applications/${serializePathParameter(applicationId, { name: 'applicationId', style: 'simple', explode: false })}/cancel`), { signal: requestOptions?.signal, timeout: requestOptions?.timeout, method: 'POST' as any, sdkworkUnwrapKind: 'item' });
+    return this.client.request<PartnerJoinApplicationItem>(appApiPath(`/partner_join/applications/${serializePathParameter(applicationId, { name: 'applicationId', style: 'simple', explode: false })}/cancel`), { ...(requestOptions?.signal !== undefined ? { signal: requestOptions.signal } : {}), ...(requestOptions?.timeout !== undefined ? { timeout: requestOptions.timeout } : {}), method: 'POST' as any, sdkworkUnwrapKind: 'item' });
   }
 }
 
@@ -65,16 +65,14 @@ export class JoinPartnerJoinApi {
 
 /** Retrieve partner program catalog */
   async retrieve(requestOptions?: ApiRequestOptions): Promise<PartnerJoinProgramItem> {
-    return this.client.request<PartnerJoinProgramItem>(appApiPath(`/partner_join`), { signal: requestOptions?.signal, timeout: requestOptions?.timeout, method: 'GET' as any, skipAuth: true, sdkworkUnwrapKind: 'item' });
+    return this.client.request<PartnerJoinProgramItem>(appApiPath(`/partner_join`), { ...(requestOptions?.signal !== undefined ? { signal: requestOptions.signal } : {}), ...(requestOptions?.timeout !== undefined ? { timeout: requestOptions.timeout } : {}), method: 'GET' as any, skipAuth: true, sdkworkUnwrapKind: 'item' });
   }
 }
 
 export class JoinApi {
-  private client: HttpClient;
   public readonly partnerJoin: JoinPartnerJoinApi;
 
   constructor(client: HttpClient) {
-    this.client = client;
     this.partnerJoin = new JoinPartnerJoinApi(client);
   }
 

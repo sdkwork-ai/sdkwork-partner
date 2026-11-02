@@ -36,6 +36,12 @@ impl PostgresPartnerAdminRepository {
     pub fn new(pool: sqlx::PgPool, wallet: Arc<dyn PartnerWalletPort>) -> Self {
         Self { pool, wallet }
     }
+
+    /// Shared read access for the partner-centre projections, which live in a
+    /// separate module but read the same PostgreSQL pool.
+    pub(crate) fn pool(&self) -> &sqlx::PgPool {
+        &self.pool
+    }
 }
 
 fn next_bigint_id() -> i64 {
@@ -47,7 +53,7 @@ fn next_uuid() -> String {
     uuid::Uuid::new_v4().to_string()
 }
 
-fn error_from_sql(error: sqlx::Error) -> CommerceServiceError {
+pub(crate) fn error_from_sql(error: sqlx::Error) -> CommerceServiceError {
     if let sqlx::Error::Database(db_error) = &error {
         if db_error.is_unique_violation() {
             return CommerceServiceError::conflict("unique constraint violated");

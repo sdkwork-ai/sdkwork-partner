@@ -11,6 +11,9 @@ use sdkwork_commerce_partner_service::backend_admin::{
     PartnerAdminRepositoryPort, PartnerAdminService,
 };
 use sdkwork_commerce_partner_service::join_apply::{PartnerJoinRepositoryPort, PartnerJoinService};
+use sdkwork_commerce_partner_service::partner_center::{
+    PartnerCenterReadPort, PartnerCenterService,
+};
 use sdkwork_database_sqlx::DatabasePool;
 use sdkwork_partner_database_host::{
     bootstrap_partner_database_from_env, bootstrap_partner_database_host_with_pool,
@@ -22,6 +25,7 @@ pub struct PartnerServiceHost {
     database: PartnerDatabaseHost,
     partner_admin: Arc<PartnerAdminService>,
     partner_join: Arc<PartnerJoinService>,
+    partner_center: Arc<PartnerCenterService>,
 }
 
 impl PartnerServiceHost {
@@ -29,11 +33,13 @@ impl PartnerServiceHost {
         database: PartnerDatabaseHost,
         partner_admin: Arc<PartnerAdminService>,
         partner_join: Arc<PartnerJoinService>,
+        partner_center: Arc<PartnerCenterService>,
     ) -> Self {
         Self {
             database,
             partner_admin,
             partner_join,
+            partner_center,
         }
     }
 
@@ -69,15 +75,29 @@ impl PartnerServiceHost {
             pool.clone(),
             Arc::new(PartnerAccountWalletAdapter::new(pool.clone())),
         ));
-        // One PostgreSQL repository instance backs both ports: the admin
-        // service (levels/partners/commission review) and the join app
-        // service (partner join applications + program catalog reads).
+        // One PostgreSQL repository instance backs every port: the admin
+        // service (levels/partners/commission review), the join app service
+        // (applications + program catalog), and the self-service centre
+        // (team/commission read models + withdrawal commands).
         let admin_repository: Arc<dyn PartnerAdminRepositoryPort + Send + Sync> =
             repository.clone();
-        let join_repository: Arc<dyn PartnerJoinRepositoryPort + Send + Sync> = repository;
+        let join_repository: Arc<dyn PartnerJoinRepositoryPort + Send + Sync> = repository.clone();
+        let center_repository: Arc<dyn PartnerCenterReadPort + Send + Sync> = repository;
         let partner_admin = Arc::new(PartnerAdminService::new(admin_repository.clone()));
-        let partner_join = Arc::new(PartnerJoinService::new(join_repository, admin_repository));
-        Ok(Self::new(database, partner_admin, partner_join))
+        let partner_join = Arc::new(PartnerJoinService::new(
+            join_repository,
+            admin_repository.clone(),
+        ));
+        let partner_center = Arc::new(PartnerCenterService::new(
+            center_repository,
+            admin_repository,
+        ));
+        Ok(Self::new(
+            database,
+            partner_admin,
+            partner_join,
+            partner_center,
+        ))
     }
 
     pub fn partner_admin_service(&self) -> Arc<PartnerAdminService> {
@@ -86,6 +106,10 @@ impl PartnerServiceHost {
 
     pub fn partner_join_service(&self) -> Arc<PartnerJoinService> {
         self.partner_join.clone()
+    }
+
+    pub fn partner_center_service(&self) -> Arc<PartnerCenterService> {
+        self.partner_center.clone()
     }
 
     pub fn database_pool(&self) -> &DatabasePool {

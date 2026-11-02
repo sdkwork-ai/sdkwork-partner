@@ -62,8 +62,9 @@ pub async fn bootstrap_partner_database_host_with_pool(
     pool: &DatabasePool,
 ) -> Result<PartnerDatabaseHost, String> {
     if pool.as_postgres().is_none() {
-        return Err("partner authoritative-server assembly requires a shared PostgreSQL pool"
-            .to_owned());
+        return Err(
+            "partner authoritative-server assembly requires a shared PostgreSQL pool".to_owned(),
+        );
     }
     let module = Arc::new(
         database_module()

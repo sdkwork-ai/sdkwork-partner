@@ -9,11 +9,22 @@
     "protocol": "http",
     "packageName": "sdkwork-partner-app-sdk-generated-typescript"
   },
-  "changeFingerprint": "18adac52c40b9f7300eb136d30509ac3d941a41b99ecdd7b9884fc5cb444b56a",
+  "changeFingerprint": "abf76c4121bcc6a9a22122e589d8681bbbf6d517dd70da38d28c517bfe6706b6",
   "changes": {
-    "createdGeneratedFiles": [],
-    "updatedGeneratedFiles": [],
-    "unchangedGeneratedFiles": [
+    "createdGeneratedFiles": [
+      "src/api/center.ts",
+      "src/types/create-partner-withdrawal-request.ts",
+      "src/types/partner-center-envelope.ts",
+      "src/types/partner-center-item.ts",
+      "src/types/partner-commission-record-item.ts",
+      "src/types/partner-commission-record-list-envelope.ts",
+      "src/types/partner-team-list-envelope.ts",
+      "src/types/partner-team-member-item.ts",
+      "src/types/partner-withdrawal-envelope.ts",
+      "src/types/partner-withdrawal-item.ts",
+      "src/types/partner-withdrawal-list-envelope.ts"
+    ],
+    "updatedGeneratedFiles": [
       "bin/publish-core.mjs",
       "bin/publish.ps1",
       "bin/publish.sh",
@@ -51,36 +62,268 @@
       "src/types/sdk-work-api-response.ts",
       "tsconfig.json"
     ],
-    "deletedGeneratedFiles": [],
+    "unchangedGeneratedFiles": [],
+    "deletedGeneratedFiles": [
+      "src/api/base.d.ts",
+      "src/api/index.d.ts",
+      "src/api/join.d.ts",
+      "src/api/paths.d.ts",
+      "src/types/common.d.ts",
+      "src/types/index.d.ts",
+      "src/types/invite-code-validate-envelope.d.ts",
+      "src/types/invite-code-validate-item.d.ts",
+      "src/types/level-benefit-item.d.ts",
+      "src/types/page-info.d.ts",
+      "src/types/partner-join-application-item-envelope.d.ts",
+      "src/types/partner-join-application-item.d.ts",
+      "src/types/partner-join-application-list-envelope.d.ts",
+      "src/types/partner-join-application-submit-request.d.ts",
+      "src/types/partner-join-level-item.d.ts",
+      "src/types/partner-join-program-envelope.d.ts",
+      "src/types/partner-join-program-item.d.ts",
+      "src/types/partner-join-rules-item.d.ts",
+      "src/types/problem-detail.d.ts",
+      "src/types/sdk-work-api-response.d.ts"
+    ],
     "scaffoldedFiles": [],
     "preservedScaffoldFiles": [
       "custom/build-runtime.mjs",
       "custom/README.md"
     ],
-    "backedUpFiles": []
+    "backedUpFiles": [
+      "bin/publish-core.mjs",
+      "bin/publish.ps1",
+      "bin/publish.sh",
+      "bin/sdk-gen.bat",
+      "bin/sdk-gen.sh",
+      "CHANGELOG.md",
+      "LICENSE",
+      "package.json",
+      "README.md",
+      "sdkwork-sdk.json",
+      "src/api/base.d.ts",
+      "src/api/base.ts",
+      "src/api/index.d.ts",
+      "src/api/index.ts",
+      "src/api/join.d.ts",
+      "src/api/join.ts",
+      "src/api/paths.d.ts",
+      "src/api/paths.ts",
+      "src/auth/index.ts",
+      "src/http/client.ts",
+      "src/http/index.ts",
+      "src/index.ts",
+      "src/sdk.ts",
+      "src/types/common.d.ts",
+      "src/types/common.ts",
+      "src/types/index.d.ts",
+      "src/types/index.ts",
+      "src/types/invite-code-validate-envelope.d.ts",
+      "src/types/invite-code-validate-envelope.ts",
+      "src/types/invite-code-validate-item.d.ts",
+      "src/types/invite-code-validate-item.ts",
+      "src/types/level-benefit-item.d.ts",
+      "src/types/level-benefit-item.ts",
+      "src/types/page-info.d.ts",
+      "src/types/page-info.ts",
+      "src/types/partner-join-application-item-envelope.d.ts",
+      "src/types/partner-join-application-item-envelope.ts",
+      "src/types/partner-join-application-item.d.ts",
+      "src/types/partner-join-application-item.ts",
+      "src/types/partner-join-application-list-envelope.d.ts",
+      "src/types/partner-join-application-list-envelope.ts",
+      "src/types/partner-join-application-submit-request.d.ts",
+      "src/types/partner-join-application-submit-request.ts",
+      "src/types/partner-join-level-item.d.ts",
+      "src/types/partner-join-level-item.ts",
+      "src/types/partner-join-program-envelope.d.ts",
+      "src/types/partner-join-program-envelope.ts",
+      "src/types/partner-join-program-item.d.ts",
+      "src/types/partner-join-program-item.ts",
+      "src/types/partner-join-rules-item.d.ts",
+      "src/types/partner-join-rules-item.ts",
+      "src/types/problem-detail.d.ts",
+      "src/types/problem-detail.ts",
+      "src/types/sdk-work-api-response.d.ts",
+      "src/types/sdk-work-api-response.ts",
+      "tsconfig.json"
+    ]
   },
   "impact": {
     "schemaVersion": 1,
-    "areas": [],
-    "details": [],
-    "requiresVerification": false,
-    "summary": "No generated, scaffold, or backup changes detected. Verification can be skipped."
+    "areas": [
+      "api-surface",
+      "models",
+      "runtime",
+      "build-metadata",
+      "publish-workflow",
+      "documentation",
+      "unknown"
+    ],
+    "details": [
+      {
+        "area": "api-surface",
+        "paths": [
+          "src/api/base.d.ts",
+          "src/api/base.ts",
+          "src/api/center.ts",
+          "src/api/index.d.ts",
+          "src/api/index.ts",
+          "src/api/join.d.ts",
+          "src/api/join.ts",
+          "src/api/paths.d.ts",
+          "src/api/paths.ts",
+          "src/http/client.ts",
+          "src/sdk.ts"
+        ]
+      },
+      {
+        "area": "models",
+        "paths": [
+          "src/types/common.d.ts",
+          "src/types/common.ts",
+          "src/types/create-partner-withdrawal-request.ts",
+          "src/types/index.d.ts",
+          "src/types/index.ts",
+          "src/types/invite-code-validate-envelope.d.ts",
+          "src/types/invite-code-validate-envelope.ts",
+          "src/types/invite-code-validate-item.d.ts",
+          "src/types/invite-code-validate-item.ts",
+          "src/types/level-benefit-item.d.ts",
+          "src/types/level-benefit-item.ts",
+          "src/types/page-info.d.ts",
+          "src/types/page-info.ts",
+          "src/types/partner-center-envelope.ts",
+          "src/types/partner-center-item.ts",
+          "src/types/partner-commission-record-item.ts",
+          "src/types/partner-commission-record-list-envelope.ts",
+          "src/types/partner-join-application-item-envelope.d.ts",
+          "src/types/partner-join-application-item-envelope.ts",
+          "src/types/partner-join-application-item.d.ts",
+          "src/types/partner-join-application-item.ts",
+          "src/types/partner-join-application-list-envelope.d.ts",
+          "src/types/partner-join-application-list-envelope.ts",
+          "src/types/partner-join-application-submit-request.d.ts",
+          "src/types/partner-join-application-submit-request.ts",
+          "src/types/partner-join-level-item.d.ts",
+          "src/types/partner-join-level-item.ts",
+          "src/types/partner-join-program-envelope.d.ts",
+          "src/types/partner-join-program-envelope.ts",
+          "src/types/partner-join-program-item.d.ts",
+          "src/types/partner-join-program-item.ts",
+          "src/types/partner-join-rules-item.d.ts",
+          "src/types/partner-join-rules-item.ts",
+          "src/types/partner-team-list-envelope.ts",
+          "src/types/partner-team-member-item.ts",
+          "src/types/partner-withdrawal-envelope.ts",
+          "src/types/partner-withdrawal-item.ts",
+          "src/types/partner-withdrawal-list-envelope.ts",
+          "src/types/problem-detail.d.ts",
+          "src/types/problem-detail.ts",
+          "src/types/sdk-work-api-response.d.ts",
+          "src/types/sdk-work-api-response.ts"
+        ]
+      },
+      {
+        "area": "runtime",
+        "paths": [
+          "src/auth/index.ts",
+          "src/http/client.ts",
+          "src/http/index.ts"
+        ]
+      },
+      {
+        "area": "build-metadata",
+        "paths": [
+          "package.json",
+          "sdkwork-sdk.json",
+          "tsconfig.json"
+        ]
+      },
+      {
+        "area": "publish-workflow",
+        "paths": [
+          "bin/publish-core.mjs",
+          "bin/publish.ps1",
+          "bin/publish.sh",
+          "bin/sdk-gen.bat",
+          "bin/sdk-gen.sh"
+        ]
+      },
+      {
+        "area": "documentation",
+        "paths": [
+          "CHANGELOG.md",
+          "README.md"
+        ]
+      },
+      {
+        "area": "unknown",
+        "paths": [
+          "LICENSE",
+          "src/index.ts"
+        ]
+      }
+    ],
+    "requiresVerification": true,
+    "summary": "Detected impact areas: api-surface, models, runtime, build-metadata, publish-workflow, documentation, unknown. Verification is required."
   },
   "verificationPlan": {
-    "shouldRun": false,
-    "runPhase": "skip",
-    "summary": "No generated, scaffold, or backup changes detected. Verification can be skipped.",
-    "steps": []
+    "shouldRun": true,
+    "runPhase": "now",
+    "summary": "Detected impact areas: api-surface, models, runtime, build-metadata, publish-workflow, documentation, unknown. Verification is required. Run the required verification commands now against the generated SDK output.",
+    "steps": [
+      {
+        "id": "check",
+        "title": "Unified package check",
+        "required": true,
+        "rationale": "Validate the generated package with the unified publish helper. Triggered by: api-surface, models, runtime, build-metadata, publish-workflow, documentation, unknown.",
+        "workingDirectory": "D:\\sdkwork-space\\sdkwork-partner\\sdks\\sdkwork-partner-app-sdk\\sdkwork-partner-app-sdk-typescript\\generated\\server-openapi",
+        "command": "node",
+        "args": [
+          "./bin/publish-core.mjs",
+          "--language",
+          "typescript",
+          "--project-dir",
+          ".",
+          "--action",
+          "check"
+        ],
+        "displayCommand": "node ./bin/publish-core.mjs --language typescript --project-dir . --action check"
+      },
+      {
+        "id": "build",
+        "title": "Unified package build",
+        "required": true,
+        "rationale": "Run the full package build because this language uses a lighter check path than the final build. Triggered by: api-surface, models, runtime, build-metadata, publish-workflow, documentation, unknown.",
+        "workingDirectory": "D:\\sdkwork-space\\sdkwork-partner\\sdks\\sdkwork-partner-app-sdk\\sdkwork-partner-app-sdk-typescript\\generated\\server-openapi",
+        "command": "node",
+        "args": [
+          "./bin/publish-core.mjs",
+          "--language",
+          "typescript",
+          "--project-dir",
+          ".",
+          "--action",
+          "build"
+        ],
+        "displayCommand": "node ./bin/publish-core.mjs --language typescript --project-dir . --action build"
+      }
+    ]
   },
   "executionDecision": {
     "schemaVersion": 1,
-    "riskLevel": "low",
-    "nextAction": "skip",
+    "riskLevel": "high",
+    "nextAction": "verify",
     "requiresManualReview": false,
     "applyRequiresExpectedFingerprint": false,
-    "summary": "No actionable changes were detected. No apply or verification step is required.",
+    "summary": "Changes have been applied. Run the required verification plan now.",
     "reasons": [
-      "no-actionable-changes"
+      "backed-up-generated-files",
+      "deleted-generated-files",
+      "manual-review-required",
+      "unknown-impact",
+      "verification-required"
     ]
   },
   "preservedLegacyFiles": false

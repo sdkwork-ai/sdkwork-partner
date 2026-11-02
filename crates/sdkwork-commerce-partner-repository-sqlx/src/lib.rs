@@ -9,6 +9,7 @@ mod mapping;
 mod partner_admin_sql;
 pub mod partner_relation;
 pub mod postgres_partner_admin;
+pub mod postgres_partner_center;
 
 pub use account_adapter::{PartnerAccountWalletAdapter, PartnerWalletPort};
 pub use partner_relation::PostgresPartnerRelationResolver;

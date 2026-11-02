@@ -1,11 +1,13 @@
 mod api_response;
 pub mod http_route_manifest;
 mod operations;
+mod partner_center;
 pub mod routes;
 mod subject;
 pub mod web_bootstrap;
 
 pub use operations::build_partner_join_router;
+pub use partner_center::build_partner_center_router;
 pub use routes::{build_partner_app_router, build_partner_app_router_with_framework};
 pub use web_bootstrap::{
     partner_app_api_public_path_prefixes, wrap_router_with_web_framework,

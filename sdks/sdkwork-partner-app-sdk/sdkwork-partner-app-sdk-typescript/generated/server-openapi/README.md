@@ -27,7 +27,7 @@ client.setAuthToken('your-auth-token');
 client.setAccessToken('your-access-token');
 
 // Use the SDK
-const result = await client.join.partnerJoin.retrieve();
+const result = await client.center.partnerCenter.retrieve();
 ```
 
 ## Authentication
@@ -55,6 +55,7 @@ const client = new SdkworkAppClient({
 ## API Modules
 
 - `client.join` - join API
+- `client.center` - center API
 
 ## Usage Examples
 
@@ -65,13 +66,20 @@ const client = new SdkworkAppClient({
 const result = await client.join.partnerJoin.retrieve();
 ```
 
+### center
+
+```typescript
+// Retrieve my distribution centre overview
+const result = await client.center.partnerCenter.retrieve();
+```
+
 ## Error Handling
 
 ```typescript
 import { SdkworkAppClient, NetworkError, TimeoutError, AuthenticationError } from 'sdkwork-partner-app-sdk-generated-typescript';
 
 try {
-  const result = await client.join.partnerJoin.retrieve();
+  const result = await client.center.partnerCenter.retrieve();
 } catch (error) {
   if (error instanceof AuthenticationError) {
     console.error('Authentication failed:', error.message);
@@ -91,6 +99,8 @@ This SDK includes cross-platform publish scripts in `bin/`:
 - `bin/publish-core.mjs`
 - `bin/publish.sh`
 - `bin/publish.ps1`
+
+TypeScript check and publish commands materialize workspace dependency versions in a temporary tarball with pnpm. They reject local-only dependency protocols before npm publication and do not rewrite the source `package.json`.
 
 ### Check
 

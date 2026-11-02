@@ -8,16 +8,17 @@
 
 | 层 | 位置 | 职责 |
 | --- | --- | --- |
-| 路由 | `crates/sdkwork-routes-partner-backend-api` | HTTP 路由适配 + ACL + route manifest |
-| 服务 | `crates/sdkwork-commerce-partner-service` | 业务规则（commands/queries/domain/ports/backend_admin） |
-| 仓储 | `crates/sdkwork-commerce-partner-repository-sqlx` | SQLx 访问，事务 + 递归 CTE |
+| 路由 | `crates/sdkwork-routes-partner-backend-api` | 管理面 HTTP 路由适配 + ACL + route manifest |
+| 路由 | `crates/sdkwork-routes-partner-app-api` | 自助端路由：`partner_join.*`、`partner_center.*` |
+| 服务 | `crates/sdkwork-commerce-partner-service` | 业务规则（commands/queries/domain/ports/backend_admin/join_apply/partner_center） |
+| 仓储 | `crates/sdkwork-commerce-partner-repository-sqlx` | SQLx 访问，事务 + 递归 CTE + 团队收益投影 |
 | 数据库宿主 | `crates/sdkwork-partner-database-host` | 数据库模块加载与生命周期 |
-| 服务宿主 | `crates/sdkwork-partner-service-host` | 服务容器 + capture/settlement worker |
+| 服务宿主 | `crates/sdkwork-partner-service-host` | 服务容器 + capture/settlement worker + `PartnerCenterService` |
 | 装配 | `crates/sdkwork-api-partner-assembly` | host-neutral API 装配 |
 | 独立网关 | `crates/sdkwork-api-partner-standalone-gateway` | standalone binary `partner-server` |
 | 数据库 | `database/` | module `partner`，表前缀 `partner_` |
-| 契约 | `apis/backend-api/partner/` | OpenAPI 权威契约 |
-| SDK | `sdks/sdkwork-partner-backend-sdk/` | `@sdkwork/partner-backend-sdk` |
+| 契约 | `apis/backend-api/partner/`、`apis/app-api/partner/` | OpenAPI 权威契约（管理面 + 自助端） |
+| SDK | `sdks/sdkwork-partner-backend-sdk/`、`sdks/sdkwork-partner-app-sdk/` | `@sdkwork/partner-backend-sdk`、`@sdkwork/partner-app-sdk` |
 
 ## 3. 领域模型
 
@@ -36,7 +37,17 @@
 - capture worker（`PARTNER_COMMISSION_CAPTURE_INTERVAL_SECONDS`，默认 300，可关）：读 `commerce_usage_statement`（已结算）+ 充值支付成功记录 → 写 PENDING 事件；表不可用时跳过（standalone 走手工登记）。
 - settlement worker / 管理端手动触发：PENDING → 逐级分配 → SETTLED；无绑定或无 ACTIVE 代理 → SKIPPED。
 
-## 6. 联邦接入（宿主侧触点）
+## 6. 自助端（app-api）
+
+- `partner_join.*`：公开计划目录、邀请码校验；登录用户提交/查看/撤回加盟申请。
+- `partner_center.*`：登录用户的分销中心。合伙人身份只由 IAM 用户解析（`partner_partner.user_account_id`），不接受客户端传入 partner id。
+  - `GET /partner_center`：身份 + 等级 + 上级 + 直属/全团队人数 + 客户数 + 可用/冻结/累计收益/已提现/最低提现。
+  - `GET /partner_center/team`：递归 CTE 团队子树（深度 ≤ 64），逐成员聚合累计收益（`partner_commission_distribution`）与可提现余额（`acct_account`）。
+  - `GET /partner_center/commissions`：仅返回本人作为 receiver 的分配行，联查 settlement/event 得到来源、比例、金额与状态。
+  - `GET/POST /partner_center/withdrawals`：复用管理端提现命令（最低额度、可用余额、`acct_hold` 冻结、审核/打款状态机），仅按当前 partner 过滤。
+- 金额字段为十进制字符串；id/计数按 `API_SPEC §13` 以 int64 字符串输出。
+
+## 7. 联邦接入（宿主侧触点）
 
 - `Cargo.toml [workspace.dependencies]`：`sdkwork_routes_partner_backend_api` 等。
 - 后端路由：`build_backend_partner_router(PartnerAdminService::new(PostgresPartnerAdminRepository::new(commerce_pool, Arc::new(PartnerAccountWalletAdapter::new(commerce_pool.clone())))))` → `.merge(partner_router)`。

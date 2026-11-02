@@ -3,15 +3,19 @@ import type { SdkworkAppConfig } from './types/common';
 import type { AuthTokenManager } from '@sdkwork/sdk-common';
 
 import { JoinApi, createJoinApi } from './api/join';
+import { CenterApi, createCenterApi } from './api/center';
 
 export class SdkworkAppClient {
   private httpClient: HttpClient;
 
   public readonly join: JoinApi;
+  public readonly center: CenterApi;
 
   constructor(config: SdkworkAppConfig) {
     this.httpClient = createHttpClient(config);
     this.join = createJoinApi(this.httpClient);
+
+    this.center = createCenterApi(this.httpClient);
   }
   setAuthToken(token: string): this {
     this.httpClient.setAuthToken(token);

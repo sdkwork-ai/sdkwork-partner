@@ -17,6 +17,10 @@
     {
       "name": "join",
       "description": "Partner join (伙伴计划) marketing module."
+    },
+    {
+      "name": "center",
+      "description": "Self-service distribution centre (分销中心)."
     }
   ],
   "paths": {
@@ -96,7 +100,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/app/v3/api/partner_join/applications": {
@@ -200,7 +205,8 @@
               }
             }
           }
-        }
+        },
+        "parameters": []
       }
     },
     "/app/v3/api/partner_join/applications/mine": {
@@ -469,6 +475,523 @@
           },
           "400": {
             "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/v3/api/partner_center": {
+      "get": {
+        "operationId": "partnerCenter.retrieve",
+        "summary": "Retrieve my distribution centre overview",
+        "description": "Resolves the partner bound to the signed-in user and returns identity, network size, and money summary (available/frozen/earned/withdrawn, minimum withdrawal).",
+        "tags": [
+          "center"
+        ],
+        "x-sdkwork-owner": "sdkwork-partner",
+        "x-sdkwork-api-authority": "sdkwork-partner-app-api",
+        "x-sdkwork-api-surface": "app-api",
+        "x-sdkwork-auth-mode": "dual-token",
+        "x-sdkwork-domain": "commerce",
+        "x-sdkwork-resource": "partnerCenter.retrieve",
+        "security": [
+          {
+            "AccessToken": [],
+            "AuthToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerCenterEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/v3/api/partner_center/team": {
+      "get": {
+        "operationId": "partnerCenter.team.list",
+        "summary": "List my team with per-member earnings",
+        "description": "Pages the caller's partner subtree (depth 1..N) with each member's level, direct team size, customer count, lifetime commission, and available balance.",
+        "tags": [
+          "center"
+        ],
+        "x-sdkwork-owner": "sdkwork-partner",
+        "x-sdkwork-api-authority": "sdkwork-partner-app-api",
+        "x-sdkwork-api-surface": "app-api",
+        "x-sdkwork-auth-mode": "dual-token",
+        "x-sdkwork-domain": "commerce",
+        "x-sdkwork-resource": "partnerCenter.team",
+        "security": [
+          {
+            "AccessToken": [],
+            "AuthToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerTeamListEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/v3/api/partner_center/commissions": {
+      "get": {
+        "operationId": "partnerCenter.commissionRecords.list",
+        "summary": "List my commission records",
+        "description": "Pages commission allocations received by the caller: source event, base amount, ratio, amount, level offset, and settlement status.",
+        "tags": [
+          "center"
+        ],
+        "x-sdkwork-owner": "sdkwork-partner",
+        "x-sdkwork-api-authority": "sdkwork-partner-app-api",
+        "x-sdkwork-api-surface": "app-api",
+        "x-sdkwork-auth-mode": "dual-token",
+        "x-sdkwork-domain": "commerce",
+        "x-sdkwork-resource": "partnerCenter.commissionRecords",
+        "security": [
+          {
+            "AccessToken": [],
+            "AuthToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerCommissionRecordListEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/v3/api/partner_center/withdrawals": {
+      "get": {
+        "operationId": "partnerCenter.withdrawals.list",
+        "summary": "List my withdrawals",
+        "description": "Pages the caller's withdrawal applications, newest first.",
+        "tags": [
+          "center"
+        ],
+        "x-sdkwork-owner": "sdkwork-partner",
+        "x-sdkwork-api-authority": "sdkwork-partner-app-api",
+        "x-sdkwork-api-surface": "app-api",
+        "x-sdkwork-auth-mode": "dual-token",
+        "x-sdkwork-domain": "commerce",
+        "x-sdkwork-resource": "partnerCenter.withdrawals",
+        "security": [
+          {
+            "AccessToken": [],
+            "AuthToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 200,
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerWithdrawalListEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "partnerCenter.withdrawals.create",
+        "summary": "Apply for a withdrawal",
+        "description": "Creates a withdrawal application for the signed-in partner. Minimum amount, available balance, and the account hold are enforced server-side.",
+        "tags": [
+          "center"
+        ],
+        "x-sdkwork-owner": "sdkwork-partner",
+        "x-sdkwork-api-authority": "sdkwork-partner-app-api",
+        "x-sdkwork-api-surface": "app-api",
+        "x-sdkwork-auth-mode": "dual-token",
+        "x-sdkwork-domain": "commerce",
+        "x-sdkwork-resource": "partnerCenter.withdrawals",
+        "security": [
+          {
+            "AccessToken": [],
+            "AuthToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePartnerWithdrawalRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerWithdrawalEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -845,10 +1368,7 @@
             "description": "Invite code submitted with the application (original input)."
           },
           "inviterPartnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Inviter partner id locked at submit time (null = no invite code).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -880,10 +1400,7 @@
             "format": "date-time"
           },
           "approvedPartnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Partner record created on approval (closed loop reference).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -916,10 +1433,7 @@
             "description": "Whether the invite code is valid."
           },
           "partnerId": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": "string",
             "description": "Inviter partner id (null when invalid).",
             "format": "int64",
             "x-sdkwork-int64-string": true
@@ -1049,6 +1563,480 @@
             }
           }
         ]
+      },
+      "PartnerCenterItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "partnerId",
+          "name",
+          "levelNo",
+          "levelName",
+          "status",
+          "inviteCode",
+          "joinedAt",
+          "parentPartnerName",
+          "directTeamSize",
+          "teamSize",
+          "customerCount",
+          "currency",
+          "availableBalance",
+          "frozenBalance",
+          "totalCommission",
+          "withdrawnAmount",
+          "minWithdrawalAmount"
+        ],
+        "properties": {
+          "partnerId": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "levelNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "levelName": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 16
+          },
+          "inviteCode": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "joinedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "parentPartnerName": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "directTeamSize": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "teamSize": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "customerCount": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "currency": {
+            "type": "string",
+            "maxLength": 8
+          },
+          "availableBalance": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "frozenBalance": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "totalCommission": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "withdrawnAmount": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "minWithdrawalAmount": {
+            "type": "string",
+            "maxLength": 32
+          }
+        }
+      },
+      "PartnerTeamMemberItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "partnerId",
+          "name",
+          "levelNo",
+          "levelName",
+          "status",
+          "joinedAt",
+          "depth",
+          "directTeamSize",
+          "customerCount",
+          "totalCommission",
+          "availableBalance"
+        ],
+        "properties": {
+          "partnerId": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "levelNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "levelName": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 16
+          },
+          "joinedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "depth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "directTeamSize": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "customerCount": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "totalCommission": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "availableBalance": {
+            "type": "string",
+            "maxLength": 32
+          }
+        }
+      },
+      "PartnerCommissionRecordItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "settlementId",
+          "eventId",
+          "sourceType",
+          "sourceRef",
+          "baseAmount",
+          "ratio",
+          "amount",
+          "levelOffset",
+          "status",
+          "computedAt",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "settlementId": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "eventId": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "sourceType": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "sourceRef": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "baseAmount": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "ratio": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "amount": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "levelOffset": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 16
+          },
+          "computedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PartnerWithdrawalItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "amount",
+          "status",
+          "reviewRemark",
+          "paidAt",
+          "remark",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "amount": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 16
+          },
+          "reviewRemark": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "paidAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "remark": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CreatePartnerWithdrawalRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "amount"
+        ],
+        "properties": {
+          "amount": {
+            "type": "string",
+            "pattern": "^[0-9]+(\\.[0-9]{1,2})?$",
+            "minLength": 1,
+            "maxLength": 32
+          },
+          "remark": {
+            "type": "string",
+            "maxLength": 1024,
+            "default": ""
+          }
+        }
+      },
+      "PartnerCenterEnvelope": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SdkWorkApiResponse"
+          },
+          {
+            "type": "object",
+            "required": [
+              "data"
+            ],
+            "properties": {
+              "data": {
+                "type": "object",
+                "required": [
+                  "item"
+                ],
+                "properties": {
+                  "item": {
+                    "$ref": "#/components/schemas/PartnerCenterItem"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PartnerTeamListEnvelope": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SdkWorkApiResponse"
+          },
+          {
+            "type": "object",
+            "required": [
+              "data"
+            ],
+            "properties": {
+              "data": {
+                "type": "object",
+                "required": [
+                  "items",
+                  "pageInfo"
+                ],
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PartnerTeamMemberItem"
+                    }
+                  },
+                  "pageInfo": {
+                    "$ref": "#/components/schemas/PageInfo"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PartnerCommissionRecordListEnvelope": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SdkWorkApiResponse"
+          },
+          {
+            "type": "object",
+            "required": [
+              "data"
+            ],
+            "properties": {
+              "data": {
+                "type": "object",
+                "required": [
+                  "items",
+                  "pageInfo"
+                ],
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PartnerCommissionRecordItem"
+                    }
+                  },
+                  "pageInfo": {
+                    "$ref": "#/components/schemas/PageInfo"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PartnerWithdrawalListEnvelope": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SdkWorkApiResponse"
+          },
+          {
+            "type": "object",
+            "required": [
+              "data"
+            ],
+            "properties": {
+              "data": {
+                "type": "object",
+                "required": [
+                  "items",
+                  "pageInfo"
+                ],
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PartnerWithdrawalItem"
+                    }
+                  },
+                  "pageInfo": {
+                    "$ref": "#/components/schemas/PageInfo"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PartnerWithdrawalEnvelope": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SdkWorkApiResponse"
+          },
+          {
+            "type": "object",
+            "required": [
+              "data"
+            ],
+            "properties": {
+              "data": {
+                "type": "object",
+                "required": [
+                  "item"
+                ],
+                "properties": {
+                  "item": {
+                    "$ref": "#/components/schemas/PartnerWithdrawalItem"
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "responses": {
@@ -1088,6 +2076,56 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/InviteCodeValidateEnvelope"
+            }
+          }
+        }
+      },
+      "PartnerCenterEnvelopeResponse": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PartnerCenterEnvelope"
+            }
+          }
+        }
+      },
+      "PartnerTeamListEnvelopeResponse": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PartnerTeamListEnvelope"
+            }
+          }
+        }
+      },
+      "PartnerCommissionRecordListEnvelopeResponse": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PartnerCommissionRecordListEnvelope"
+            }
+          }
+        }
+      },
+      "PartnerWithdrawalListEnvelopeResponse": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PartnerWithdrawalListEnvelope"
+            }
+          }
+        }
+      },
+      "PartnerWithdrawalEnvelopeResponse": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/PartnerWithdrawalEnvelope"
             }
           }
         }

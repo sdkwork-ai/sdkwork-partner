@@ -6,7 +6,10 @@ use sdkwork_web_bootstrap::WebModule;
 mod bootstrap;
 mod generated;
 
-pub use bootstrap::{assemble_api_router, ApiAssembly, ApiAssemblyContext, assemble_app_api_contribution, assemble_backend_api_contribution, web_module_with_context};
+pub use bootstrap::{
+    assemble_api_router, assemble_app_api_contribution, assemble_backend_api_contribution,
+    web_module_with_context, ApiAssembly, ApiAssemblyContext,
+};
 
 use sdkwork_database_sqlx::DatabasePool;
 use sdkwork_partner_service_host::PartnerServiceHost;
@@ -124,5 +127,7 @@ pub fn assembly_route_count() -> usize {
 /// (API_ASSEMBLY_SPEC §4.1.1): the complete HTTP surface — every route,
 /// manifest, and OpenAPI document of this owner — as one installable module.
 pub async fn web_module() -> Result<WebModule, String> {
-    Ok(WebModule::from_contribution(assemble_api_router_from_env().await?))
+    Ok(WebModule::from_contribution(
+        assemble_api_router_from_env().await?,
+    ))
 }
