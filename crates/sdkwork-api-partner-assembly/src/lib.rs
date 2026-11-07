@@ -119,6 +119,17 @@ pub fn app_api_route_manifest() -> sdkwork_web_core::HttpRouteManifest {
     sdkwork_routes_partner_app_api::gateway_route_manifest()
 }
 
+/// Backend-api surface route manifest owned by the dependency assembly.
+///
+/// The Cloud Router cloud assembly dispatches the partner backend router
+/// itself; its platform-gateway composition binds this manifest so the Web
+/// Framework registers `/backend/v3/api/partners/*` with the correct auth
+/// profile. Kept as an owner-defined entrypoint for the nested dependency
+/// surface contract (API_ASSEMBLY_SPEC §6.2.1).
+pub fn backend_api_route_manifest() -> sdkwork_web_core::HttpRouteManifest {
+    sdkwork_routes_partner_backend_api::gateway_route_manifest()
+}
+
 pub fn assembly_route_count() -> usize {
     generated::ROUTE_CRATE_COUNT
 }
