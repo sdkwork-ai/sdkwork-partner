@@ -118,3 +118,81 @@ pub async fn record_and_settle_order_commission(
     let outcome = repository.run_commission_settlement(command, &subject).await?;
     Ok((event_id, outcome))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use sqlx::postgres::PgPoolOptions;
+
+    fn lazy_pool() -> PgPool {
+        // Validation runs before any query, so a lazy pool suffices for these tests.
+        PgPoolOptions::new()
+            .connect_lazy("postgres://partner:partner@127.0.0.1:5432/partner")
+            .expect("lazy pool")
+    }
+
+    #[tokio::test]
+    async fn rejects_blank_order_reference() {
+        let error = record_order_commission_event(
+            &lazy_pool(),
+            1,
+            0,
+            "   ",
+            7,
+            1_000,
+            Utc::now(),
+        )
+        .await
+        .expect_err("blank reference must be rejected");
+        assert_eq!(error.code(), "validation");
+    }
+
+    #[tokio::test]
+    async fn rejects_non_positive_customer() {
+        let error = record_order_commission_event(
+            &lazy_pool(),
+            1,
+            0,
+            "order-1",
+            0,
+            1_000,
+            Utc::now(),
+        )
+        .await
+        .expect_err("customer must be positive");
+        assert_eq!(error.code(), "validation");
+    }
+
+    #[tokio::test]
+    async fn rejects_negative_revenue() {
+        let error = record_order_commission_event(
+            &lazy_pool(),
+            1,
+            0,
+            "order-1",
+            7,
+            -1,
+            Utc::now(),
+        )
+        .await
+        .expect_err("negative revenue must be rejected");
+        assert_eq!(error.code(), "validation");
+    }
+
+    #[tokio::test]
+    async fn rejects_overlong_order_reference() {
+        let reference = "x".repeat(129);
+        let error = record_order_commission_event(
+            &lazy_pool(),
+            1,
+            0,
+            &reference,
+            7,
+            1_000,
+            Utc::now(),
+        )
+        .await
+        .expect_err("reference must be bounded");
+        assert_eq!(error.code(), "validation");
+    }
+}
