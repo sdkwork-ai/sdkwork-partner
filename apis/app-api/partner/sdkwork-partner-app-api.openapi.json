@@ -952,6 +952,77 @@
           }
         }
       }
+    },
+    "/app/v3/api/partner_center/customer_bindings": {
+      "post": {
+        "operationId": "partnerCenter.customerBindings.create",
+        "summary": "Bind the signed-in buyer to a distributor by invite code",
+        "description": "Resolves an ACTIVE partner from the invite code inside the caller's tenant scope and upserts the customer binding used for two-level commission attribution. Repeated calls with the same code are idempotent.",
+        "tags": [
+          "center"
+        ],
+        "security": [
+          {
+            "AuthToken": [],
+            "AccessToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PartnerCustomerBindingCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Customer bound",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerCustomerBindingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetail"
+                }
+              }
+            }
+          }
+        },
+        "x-sdkwork-owner": "sdkwork-partner",
+        "x-sdkwork-api-authority": "sdkwork-partner-app-api",
+        "x-sdkwork-auth-mode": "dual-token"
+      }
     }
   },
   "components": {
@@ -1961,6 +2032,113 @@
                 "properties": {
                   "item": {
                     "$ref": "#/components/schemas/PartnerWithdrawalItem"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "PartnerCustomerBindingCreateRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "inviteCode"
+        ],
+        "properties": {
+          "inviteCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        }
+      },
+      "PartnerCustomerBindingItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "partnerId",
+          "customerUserId",
+          "bindingType",
+          "status",
+          "boundAt",
+          "boundBy",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "partnerId": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "customerUserId": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "bindingType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "boundAt": {
+            "type": "string"
+          },
+          "boundBy": {
+            "type": "string",
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "unboundAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unboundBy": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "int64",
+            "pattern": "^-?[0-9]+$",
+            "x-sdkwork-int64-string": true
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      },
+      "PartnerCustomerBindingResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SdkWorkApiResponse"
+          },
+          {
+            "type": "object",
+            "required": [
+              "data"
+            ],
+            "properties": {
+              "data": {
+                "type": "object",
+                "required": [
+                  "item"
+                ],
+                "properties": {
+                  "item": {
+                    "$ref": "#/components/schemas/PartnerCustomerBindingItem"
                   }
                 }
               }

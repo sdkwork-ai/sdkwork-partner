@@ -56,7 +56,7 @@
     },
     {
       "path": "src/api/center.ts",
-      "sha256": "76c2da2037ed38970ae98fbf15d158f76f0df74fe4feff5bc8d7f0b970aa57ff"
+      "sha256": "52aab693de310c7d40c0a0d980f35bf26e99a461534ddcace879367f8d19e588"
     },
     {
       "path": "src/api/index.ts",
@@ -100,7 +100,7 @@
     },
     {
       "path": "src/types/index.ts",
-      "sha256": "ef695df5ba2d53434ad692a9f092e58cceeebb9616ee6fce996b8d3322d10c6b"
+      "sha256": "925d3f2cb6debbb5be76a0ca0f8cdbb55d2e7f075718c97f0e09dac7ea67c80e"
     },
     {
       "path": "src/types/invite-code-validate-envelope.ts",
@@ -133,6 +133,18 @@
     {
       "path": "src/types/partner-commission-record-list-envelope.ts",
       "sha256": "8a199e7e636189a3321cd4f4b21ab59f57c4c2e4c0e41fedcd8a8200e0c92737"
+    },
+    {
+      "path": "src/types/partner-customer-binding-create-request.ts",
+      "sha256": "1c8680df491024ad756c5485cca9aa63dd5e8b1738a7ad2c2792f944f2f19f4d"
+    },
+    {
+      "path": "src/types/partner-customer-binding-item.ts",
+      "sha256": "de3a0cd3c5dcdd3774d76557b3444fff8094f4b568a3e2b2d48a36c1f89f9e5e"
+    },
+    {
+      "path": "src/types/partner-customer-binding-response.ts",
+      "sha256": "aa7657fb16dce1fcb9b9f8eb45e3e04710d219611c9e77147938f2d8d08daf54"
     },
     {
       "path": "src/types/partner-join-application-item-envelope.ts",

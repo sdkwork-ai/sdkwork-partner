@@ -1,8 +1,22 @@
 import { appApiPath } from './paths';
 import type { ApiRequestOptions, HttpClient } from '../http/client';
 
-import type { CreatePartnerWithdrawalRequest, PageInfo, PartnerCenterItem, PartnerCommissionRecordItem, PartnerTeamMemberItem, PartnerWithdrawalItem } from '../types';
+import type { CreatePartnerWithdrawalRequest, PageInfo, PartnerCenterItem, PartnerCommissionRecordItem, PartnerCustomerBindingCreateRequest, PartnerCustomerBindingItem, PartnerTeamMemberItem, PartnerWithdrawalItem } from '../types';
 
+
+export class CenterPartnerCenterCustomerBindingsApi {
+  private client: HttpClient;
+
+  constructor(client: HttpClient) {
+    this.client = client;
+  }
+
+
+/** Bind the signed-in buyer to a distributor by invite code */
+  async create(body: PartnerCustomerBindingCreateRequest, requestOptions?: ApiRequestOptions): Promise<PartnerCustomerBindingItem> {
+    return this.client.request<PartnerCustomerBindingItem>(appApiPath(`/partner_center/customer_bindings`), { ...(requestOptions?.signal !== undefined ? { signal: requestOptions.signal } : {}), ...(requestOptions?.timeout !== undefined ? { timeout: requestOptions.timeout } : {}), method: 'POST' as any, body, contentType: 'application/json', sdkworkUnwrapKind: 'item' });
+  }
+}
 
 export interface CenterPartnerCenterWithdrawalsListParams {
   page?: number;
@@ -83,12 +97,14 @@ export class CenterPartnerCenterApi {
   public readonly team: CenterPartnerCenterTeamApi;
   public readonly commissionRecords: CenterPartnerCenterCommissionRecordsApi;
   public readonly withdrawals: CenterPartnerCenterWithdrawalsApi;
+  public readonly customerBindings: CenterPartnerCenterCustomerBindingsApi;
 
   constructor(client: HttpClient) {
     this.client = client;
     this.team = new CenterPartnerCenterTeamApi(client);
     this.commissionRecords = new CenterPartnerCenterCommissionRecordsApi(client);
     this.withdrawals = new CenterPartnerCenterWithdrawalsApi(client);
+    this.customerBindings = new CenterPartnerCenterCustomerBindingsApi(client);
   }
 
 

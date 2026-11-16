@@ -36,6 +36,12 @@ struct ListParams {
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
+struct BindCustomerRequest {
+    invite_code: String,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct CreateWithdrawalRequest {
     amount: String,
     #[serde(default)]
@@ -53,6 +59,10 @@ pub fn build_partner_center_router(service: Arc<PartnerCenterService>) -> Router
         .route(
             "/app/v3/api/partner_center/withdrawals",
             get(list_withdrawals).post(create_withdrawal),
+        )
+        .route(
+            "/app/v3/api/partner_center/customer_bindings",
+            axum::routing::post(bind_customer),
         )
         .with_state(PartnerCenterState { service })
 }
@@ -224,4 +234,25 @@ fn build_list_query(
         None,
     )
     .map_err(|error| validation(Some(context), error.message()))
+}
+
+/// Binds the signed-in buyer to the distributor that owns the invite code.
+///
+/// The partner id is never taken from the client: the code is resolved inside the
+/// caller's tenant/organization scope and the binding is written once per
+/// (customer, partner) pair.
+async fn bind_customer(
+    State(state): State<PartnerCenterState>,
+    Extension(iam): Extension<IamAppContext>,
+    Extension(context): Extension<WebRequestContext>,
+    Json(body): Json<BindCustomerRequest>,
+) -> Response {
+    let subject = match require_subject(&context, &iam) {
+        Ok(subject) => subject,
+        Err(response) => return response,
+    };
+    match state.service.bind_customer(&body.invite_code, &subject).await {
+        Ok(item) => success_created(Some(&context), item),
+        Err(error) => service_error(Some(&context), "bind partner customer", error),
+    }
 }

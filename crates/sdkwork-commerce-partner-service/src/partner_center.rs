@@ -6,7 +6,10 @@
 //! commission records) and financial commands delegate to the admin repository
 //! so the withdrawal hold/settle lifecycle has exactly one implementation.
 
-use crate::backend_admin::{PartnerAdminListPage, PartnerAdminRepositoryPort, PartnerAdminSubject};
+use crate::backend_admin::{
+    CustomerBindingItem, PartnerAdminListPage, PartnerAdminRepositoryPort, PartnerAdminSubject,
+};
+use crate::commands::BindCustomerCommand;
 use crate::commands::CreateWithdrawalCommand;
 use crate::domain::parse_money_to_cents;
 use crate::queries::{ListWithdrawalsQuery, PartnerAdminListQuery, RetrievePartnerQuery};
@@ -178,12 +181,28 @@ pub trait PartnerCenterReadPort: Send + Sync {
         subject: &'a PartnerCenterSubject,
     ) -> PartnerCenterFuture<'a, PartnerAdminListPage<PartnerTeamMemberItem>>;
 
+    /// Resolves an ACTIVE partner from an invite code inside the caller's
+    /// tenant/organization scope (used when a buyer binds to a distributor).
+    fn find_partner_by_invite_code<'a>(
+        &'a self,
+        invite_code: String,
+        subject: &'a PartnerCenterSubject,
+    ) -> PartnerCenterFuture<'a, Option<PartnerInvitePartner>>;
+
     /// Paged commission records received by the caller.
     fn list_commission_records<'a>(
         &'a self,
         query: PartnerAdminListQuery,
         subject: &'a PartnerCenterSubject,
     ) -> PartnerCenterFuture<'a, PartnerAdminListPage<PartnerCommissionRecordItem>>;
+}
+
+/// Partner resolved from an invite code (direct customer binding).
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct PartnerInvitePartner {
+    pub partner_id: i64,
+    pub name: String,
+    pub level_no: i64,
 }
 
 /// Self-service distribution centre facade.
@@ -292,6 +311,33 @@ impl PartnerCenterService {
             page_size: page.page_size,
             total: page.total,
         })
+    }
+
+    /// Binds the signed-in buyer to the distributor that owns `invite_code`.
+    ///
+    /// Idempotent by construction: the admin repository upserts the active
+    /// binding for (tenant, organization, customer, partner), so a repeated scan
+    /// of the same invite code does not create duplicate rows.
+    pub async fn bind_customer(
+        &self,
+        invite_code: &str,
+        subject: &PartnerCenterSubject,
+    ) -> Result<CustomerBindingItem, CommerceServiceError> {
+        let code = invite_code.trim();
+        if code.is_empty() {
+            return Err(CommerceServiceError::validation("invite code is required"));
+        }
+        let partner = self
+            .read
+            .find_partner_by_invite_code(code.to_string(), subject)
+            .await?
+            .ok_or_else(|| {
+                CommerceServiceError::validation("invite code is invalid or the partner is not active")
+            })?;
+        let admin_subject = subject.admin_subject()?;
+        let command =
+            BindCustomerCommand::new(partner.partner_id, subject.user_id, "APP_INVITE")?;
+        self.admin.bind_customer(command, &admin_subject).await
     }
 
     /// Applies for a withdrawal. The partner id is resolved from the session;

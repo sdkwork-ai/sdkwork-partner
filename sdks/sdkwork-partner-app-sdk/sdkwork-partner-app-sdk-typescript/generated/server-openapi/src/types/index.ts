@@ -23,3 +23,6 @@ export type { PartnerTeamListEnvelope } from './partner-team-list-envelope';
 export type { PartnerCommissionRecordListEnvelope } from './partner-commission-record-list-envelope';
 export type { PartnerWithdrawalListEnvelope } from './partner-withdrawal-list-envelope';
 export type { PartnerWithdrawalEnvelope } from './partner-withdrawal-envelope';
+export type { PartnerCustomerBindingCreateRequest } from './partner-customer-binding-create-request';
+export type { PartnerCustomerBindingItem } from './partner-customer-binding-item';
+export type { PartnerCustomerBindingResponse } from './partner-customer-binding-response';

@@ -10,13 +10,13 @@ use sdkwork_commerce_partner_service::backend_admin::PartnerAdminListPage;
 use sdkwork_commerce_partner_service::domain::cents_to_decimal;
 use sdkwork_commerce_partner_service::partner_center::{
     PartnerCenterFuture, PartnerCenterIdentity, PartnerCenterReadPort, PartnerCenterSubject,
-    PartnerCommissionRecordItem, PartnerTeamMemberItem,
+    PartnerCommissionRecordItem, PartnerInvitePartner, PartnerTeamMemberItem,
 };
 use sdkwork_commerce_partner_service::queries::PartnerAdminListQuery;
 use sdkwork_contract_service::CommerceServiceError;
 use sqlx::Row;
 
-use crate::partner_admin_sql::COUNT_DESCENDANTS;
+use crate::partner_admin_sql::{COUNT_DESCENDANTS, SELECT_PARTNER_BY_INVITE_CODE};
 use crate::postgres_partner_admin::{error_from_sql, PostgresPartnerAdminRepository};
 
 const SELECT_PARTNER_IDENTITY: &str = r#"
@@ -311,4 +311,36 @@ impl PartnerCenterReadPort for PostgresPartnerAdminRepository {
             })
         })
     }
+    fn find_partner_by_invite_code<'a>(
+        &'a self,
+        invite_code: String,
+        subject: &'a PartnerCenterSubject,
+    ) -> PartnerCenterFuture<'a, Option<PartnerInvitePartner>> {
+        Box::pin(async move {
+            let code = invite_code.trim().to_string();
+            if code.is_empty() {
+                return Ok(None);
+            }
+            let row = sqlx::query(SELECT_PARTNER_BY_INVITE_CODE)
+                .bind(subject.tenant_id)
+                .bind(subject.organization_id)
+                .bind(&code)
+                .fetch_optional(self.pool())
+                .await
+                .map_err(error_from_sql)?;
+            let Some(row) = row else {
+                return Ok(None);
+            };
+            let status: String = row.get("status");
+            if status != "ACTIVE" {
+                return Ok(None);
+            }
+            Ok(Some(PartnerInvitePartner {
+                partner_id: row.get("id"),
+                name: row.get("name"),
+                level_no: row.get("level_no"),
+            }))
+        })
+    }
+
 }
