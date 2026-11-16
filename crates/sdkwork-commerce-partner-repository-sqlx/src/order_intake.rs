@@ -11,7 +11,17 @@ use sdkwork_commerce_partner_service::domain::cents_to_decimal;
 use sdkwork_contract_service::CommerceServiceError;
 use sqlx::PgPool;
 
-use crate::postgres_partner_admin::{error_from_sql, next_bigint_id, next_uuid};
+use std::sync::Arc;
+
+use sdkwork_commerce_partner_service::backend_admin::{
+    PartnerAdminRepositoryPort, PartnerAdminSubject, SettlementRunResult,
+};
+use sdkwork_commerce_partner_service::commands::RunCommissionSettlementCommand;
+
+use crate::account_adapter::PartnerAccountWalletAdapter;
+use crate::postgres_partner_admin::{
+    error_from_sql, next_bigint_id, next_uuid, PostgresPartnerAdminRepository,
+};
 
 const INSERT_ORDER_COMMISSION_EVENT: &str = r#"
 INSERT INTO partner_commission_event
@@ -70,4 +80,41 @@ pub async fn record_order_commission_event(
         .fetch_one(pool)
         .await
         .map_err(error_from_sql)
+}
+
+/// Records the paid order's revenue and settles pending events immediately.
+///
+/// Settlement uses the partner system actor (user 0) and the shared differential
+/// (level) engine; `FOR UPDATE SKIP LOCKED` plus the wallet idempotency keys make
+/// concurrent payment callbacks safe. `settle_limit` bounds the work done on the
+/// payment path; any residue is settled by the next payment or the admin run.
+pub async fn record_and_settle_order_commission(
+    pool: &PgPool,
+    tenant_id: i64,
+    organization_id: i64,
+    order_ref: &str,
+    customer_user_id: i64,
+    revenue_cents: i64,
+    event_at: DateTime<Utc>,
+    settle_limit: i64,
+) -> Result<(i64, SettlementRunResult), CommerceServiceError> {
+    let event_id = record_order_commission_event(
+        pool,
+        tenant_id,
+        organization_id,
+        order_ref,
+        customer_user_id,
+        revenue_cents,
+        event_at,
+    )
+    .await?;
+    let repository = PostgresPartnerAdminRepository::new(
+        pool.clone(),
+        Arc::new(PartnerAccountWalletAdapter::new(pool.clone())),
+    );
+    let subject = PartnerAdminSubject::new(tenant_id, organization_id, 0)
+        .map_err(CommerceServiceError::validation)?;
+    let command = RunCommissionSettlementCommand::new(settle_limit.max(1))?;
+    let outcome = repository.run_commission_settlement(command, &subject).await?;
+    Ok((event_id, outcome))
 }
