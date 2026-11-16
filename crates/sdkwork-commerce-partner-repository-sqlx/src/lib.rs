@@ -7,6 +7,7 @@
 pub mod account_adapter;
 mod mapping;
 mod partner_admin_sql;
+pub mod order_intake;
 pub mod partner_relation;
 pub mod postgres_partner_admin;
 pub mod postgres_partner_center;

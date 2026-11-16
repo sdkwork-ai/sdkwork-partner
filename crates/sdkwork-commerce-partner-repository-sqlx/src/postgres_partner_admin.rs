@@ -44,12 +44,12 @@ impl PostgresPartnerAdminRepository {
     }
 }
 
-fn next_bigint_id() -> i64 {
+pub(crate) fn next_bigint_id() -> i64 {
     let uuid = uuid::Uuid::new_v4();
     (uuid.as_u128() % i64::MAX as u128) as i64
 }
 
-fn next_uuid() -> String {
+pub(crate) fn next_uuid() -> String {
     uuid::Uuid::new_v4().to_string()
 }
 
